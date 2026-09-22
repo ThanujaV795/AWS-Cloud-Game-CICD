@@ -1,76 +1,197 @@
+```css
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Roboto', sans-serif; 
-    background-color: #282c34; 
-    color: #ffffff; 
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #ffffff;
     text-align: center;
     margin: 0;
-    padding: 0;
+    min-height: 100vh;
+    padding: 30px 15px;
 }
 
 .container {
-    width: auto;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #3c404d; 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); 
-    border-radius: 15px; 
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px;
+    background: rgba(30, 41, 59, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 }
 
 h1 {
-    color: white; 
+    margin: 0 0 15px;
+    font-size: 38px;
+    letter-spacing: 2px;
 }
 
 .instructions {
-    font-size: 20px;
-    margin-bottom: 30px;
-    color: #adbac7;
+    max-width: 750px;
+    margin: 0 auto 25px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.game-controls label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#difficulty {
+    padding: 11px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#start-game,
+#restart-game {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+#start-game {
+    background: #2563eb;
+}
+
+#restart-game {
+    background: #7c3aed;
+}
+
+#start-game:hover,
+#restart-game:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.info-card {
+    padding: 18px 10px;
+    background: #334155;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.info-card span {
+    display: block;
+    color: #cbd5e1;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.info-card strong {
+    font-size: 25px;
+}
+
+.game-message {
+    min-height: 30px;
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #facc15;
 }
 
 #game-board {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    gap: 15px;
     justify-content: center;
-    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
 }
 
-.card {
-    width: 211.8px;
-    height: 166.2px;
-    background-color: #565c6f;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.card img {
+#game-board img {
     width: 100%;
-    height: auto;
-    visibility: hidden; /* Hide images by default */
-    display: block;
-}
-
-.card.show img {
-    visibility: visible; /* Show image when card is flipped */
-}
-
-#start-game {
-    background-color: #4caf50;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
+    aspect-ratio: 1 / 0.8;
+    object-fit: cover;
+    background: #475569;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-#start-game:hover {
-    background-color: #43a047; /* Darker on hover */
-    transform: scale(1.05); /* Slightly enlarges on hover */
+#game-board img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
 }
+
+@media (max-width: 700px) {
+
+    .container {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .instructions {
+        font-size: 15px;
+    }
+
+    .game-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #game-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 15px 8px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    #game-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .game-controls {
+        flex-direction: column;
+    }
+
+    #difficulty,
+    #start-game,
+    #restart-game {
+        width: 100%;
+    }
+}
+```
